@@ -1,8 +1,10 @@
 #include <iostream>
 
+using namespace std;
+
 main() {
 
-  std::cout<<"hello World!";
+  cout<<"hello World!\n";
   
 }
 
