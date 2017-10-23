@@ -7,27 +7,70 @@
     android:orientation="vertical"
     tools:context="com.example.caballero.cse455_fall17.MainActivity">
 
-    <LinearLayout
-        android:id="@+id/textlayout"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="25sp"
-            android:layout_marginBottom="10dp"/>
-    </LinearLayout>
+        android:background="#ffffff"
+        android:id="@+id/ImageContainer">
 
-        <Button
-            android:id="@+id/button"
+        <ImageView
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView"
+            />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/floatingGallery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="show me!"
-            android:textSize="20sp"
-            android:onClick="onClick"/>
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="87dp"
+            android:clickable="true"
+            android:visibility="visible"
+            app:fabSize="normal"
+            app:srcCompat="@android:drawable/ic_menu_gallery"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/floatingCamera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="87dp"
+            android:clickable="true"
+            app:fabSize="normal"
+            app:srcCompat="@android:drawable/ic_menu_camera"
+            android:layout_alignTop="@+id/floatingGallery"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#e4e3e3"
+        android:id="@+id/OCRTextContainer">
+        <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:context="com.example.caballero.smartsyllabus.ScrollingActivity"
+            >
+
+            <TextView
+                android:id="@+id/ocrtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/large_text"
+                android:clickable="true"/>
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </RelativeLayout>
 
 </LinearLayout>
