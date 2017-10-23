@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         text = (TextView) findViewById(R.id.text);
         button = (Button) findViewById(R.id.button);
+        //test
     }
 
     public void onClick(View v){
