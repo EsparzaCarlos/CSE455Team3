@@ -1,76 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.example.caballero.cse455_fall17.MainActivity">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:background="#ffffff"
-        android:id="@+id/ImageContainer">
-
-        <ImageView
-            android:clickable="true"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/imageView"
-            />
+            android:orientation="vertical"
+            tools:context="com.example.caballero.cse455_fall17.MainActivity">
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/floatingGallery"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginStart="87dp"
-            android:clickable="true"
-            android:visibility="visible"
-            app:fabSize="normal"
-            app:srcCompat="@android:drawable/ic_menu_gallery"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true" />
+            <RelativeLayout
+                android:id="@+id/ImageContainer"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:background="#ffffff">
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/floatingCamera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginEnd="87dp"
-            android:clickable="true"
-            app:fabSize="normal"
-            app:srcCompat="@android:drawable/ic_menu_camera"
-            android:layout_alignTop="@+id/floatingGallery"
-            android:layout_alignParentEnd="true" />
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:background="@color/colorPrimaryDark"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true" />
 
-    </RelativeLayout>
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/floatingGallery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:visibility="visible"
+                    app:fabSize="normal"
+                    app:srcCompat="@android:drawable/ic_menu_gallery"
+                    android:layout_below="@+id/floatingCamera"
+                    android:layout_alignStart="@+id/floatingCamera"
+                    android:layout_marginTop="40dp" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#e4e3e3"
-        android:id="@+id/OCRTextContainer">
-        <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:context="com.example.caballero.smartsyllabus.ScrollingActivity"
-            >
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/floatingCamera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    app:fabSize="normal"
+                    app:srcCompat="@android:drawable/ic_menu_camera"
+                    android:layout_centerHorizontal="true" />
 
-            <TextView
-                android:id="@+id/ocrtext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:text="@string/large_text"
-                android:clickable="true"/>
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/floatingContact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:clickable="true"
+                    app:srcCompat="@android:drawable/stat_sys_phone_call_forward"
+                    app:fabSize="mini" />
 
-        </android.support.v4.widget.NestedScrollView>
 
-    </RelativeLayout>
+            </RelativeLayout>
 
-</LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#e4e3e3"
+                android:id="@+id/OCRTextContainer">
+
+                <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    tools:context="com.example.caballero.smartsyllabus.ScrollingActivity">
+
+                    <TextView
+                        android:id="@+id/ocrtext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:text="@string/large_text"
+                        android:clickable="true" />
+
+                </android.support.v4.widget.NestedScrollView>
+
+            </RelativeLayout>
+
+        </LinearLayout>
