@@ -125,6 +125,12 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //for professor's page
+    public void goToProfessors(View view){
+        Intent intent = new Intent(this, ProfessorActivity.class);
+        startActivity(intent);
+    }
+
     //ask user permission for external storage
     public void requestWrite(){
         // Here, thisActivity is the current activity

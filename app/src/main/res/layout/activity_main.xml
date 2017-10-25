@@ -56,7 +56,9 @@
                     android:layout_alignParentTop="true"
                     android:clickable="true"
                     app:srcCompat="@android:drawable/stat_sys_phone_call_forward"
-                    app:fabSize="mini" />
+                    app:fabSize="mini"
+                    android:onClick="goToProfessors"
+                    />
 
 
             </RelativeLayout>
