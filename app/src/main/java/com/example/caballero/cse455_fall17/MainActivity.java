@@ -17,6 +17,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +26,7 @@ import android.support.media.ExifInterface;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -60,10 +63,21 @@ public class MainActivity extends AppCompatActivity {
     String mCurrentPhotoPath;
     TextManager txt;
 
+    //for the drawer added by Carlos
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mToggle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //for the drawer added by Carlos
+        mDrawerLayout=(DrawerLayout) findViewById(R.id.drawer);
+        mToggle=new ActionBarDrawerToggle(MainActivity.this,mDrawerLayout,R.string.open, R.string.close);
+        mDrawerLayout.addDrawerListener(mToggle);
+        mToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         OCRTextView = (TextView) findViewById(R.id.ocrtext);
         imgPicture = (ImageView) findViewById(R.id.imageView);
@@ -101,6 +115,14 @@ public class MainActivity extends AppCompatActivity {
                 OCRTextView.setText(stringBuilder.toString());
             }
         });
+    }
+    //for the drawer to pop out added by Carlos
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(mToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     //ask user permission for external storage

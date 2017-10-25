@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Smart Syllabus</string>
     <string name="large_text">OCR text</string>
-
+    
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>
