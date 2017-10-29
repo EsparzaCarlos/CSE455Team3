@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.example.caballero.cse455_fall17.MainActivity">
+
+        <RelativeLayout
+            android:id="@+id/ImageContainer"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:background="#ffffff">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:background="@color/colorPrimaryDark"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/floatingGallery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/floatingCamera"
+                android:layout_below="@+id/floatingCamera"
+                android:layout_marginTop="40dp"
+                android:clickable="true"
+                android:visibility="visible"
+                app:backgroundTint="@android:color/holo_red_dark"
+                app:fabSize="normal"
+                app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/floatingCamera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:clickable="true"
+                app:backgroundTint="@android:color/holo_red_dark"
+                app:fabSize="normal"
+                app:srcCompat="@android:drawable/ic_menu_camera" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/floatingContact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:clickable="true"
+                android:onClick="goToProfessors"
+                app:backgroundTint="@android:color/holo_red_dark"
+                app:fabSize="mini"
+                app:srcCompat="@android:drawable/stat_sys_phone_call_forward" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#e4e3e3"
+            android:id="@+id/OCRTextContainer">
+
+            <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/darker_gray"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:context="com.example.caballero.smartsyllabus.ScrollingActivity">
+
+                <TextView
+                    android:id="@+id/ocrtext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:clickable="true"
+                    android:text="@string/large_text" />
+
+            </android.support.v4.widget.NestedScrollView>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <!--for the nav bar-->
+    <!-- <android.support.design.widget.NavigationView
+         android:layout_width="200sp"
+         android:layout_height="match_parent"
+         app:menu="@menu/nav_menu"
+         android:layout_gravity="start"
+         />-->
+</android.support.v4.widget.DrawerLayout>

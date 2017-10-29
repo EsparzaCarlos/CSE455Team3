@@ -7,14 +7,14 @@
         android:id="@+id/home"
         android:enabled="true"
         android:title="Home"
-        android:visible="true"></item>
+        android:visible="true"/>
     <item android:id="@+id/settings"
-        android:title="Settings">
-    </item>
+        android:title="Settings"/>
     <item android:id="@+id/faq"
-        android:title="FAQ">
-    </item>
+        android:title="FAQ"/>
     <item android:id="@+id/log"
-        android:title="debug Log">
-    </item>
+        android:title="debug Log"/>
+    <item
+        android:id="@+id/thememenu"
+        android:title="Theme"/>
 </menu>

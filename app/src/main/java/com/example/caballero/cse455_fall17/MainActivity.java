@@ -1,8 +1,10 @@
 package com.example.caballero.cse455_fall17;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -93,6 +95,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, MainActivity.class));
                 this.finish();
                 return true;
+            case R.id.thememenu:
+                startActivity(new Intent(MainActivity.this, Theme.class));
+                this.finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -100,8 +106,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences theme = getSharedPreferences("THEME_SELECT" , Context.MODE_PRIVATE);
+        int themeInt = theme.getInt("THEME", 0);
+        if(themeInt != R.layout.activity_main_dark && themeInt != R.layout.activity_main)
+            themeInt = R.layout.activity_main;
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(themeInt);
 
         /*//for the drawer added by Carlos
         mDrawerLayout=(DrawerLayout) findViewById(R.id.drawer);
