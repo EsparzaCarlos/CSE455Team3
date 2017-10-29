@@ -1,7 +1,6 @@
 package com.example.caballero.cse455_fall17;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -25,10 +24,8 @@ import android.os.Bundle;
 import android.support.media.ExifInterface;
 import android.util.Log;
 import android.util.SparseArray;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,14 +47,23 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView imgPicture;
-    TextView OCRTextView;
+    //for popdialog picker
+    ArrayList<Integer> mUserItems = new ArrayList<>();
+    //for words to find
+    List<String> list = new ArrayList<>();
+    //important text
+    List<String> importantText = new ArrayList<>();
+    //popdialog string array
+    String[] listItems;
+    //popdialog checkbox array
+    boolean[] checkedItems;
 
     public static final int IMAGE_GALLERY_REQUEST = 2;
     public static final int CAMERA_REQUEST = 1;
-
-    List<String> list = new ArrayList<>();
     final StringBuilder stringBuilder = new StringBuilder();
+
+    ImageView imgPicture;
+    TextView OCRTextView;
 
     Bitmap image;
     String mCurrentPhotoPath;
@@ -85,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton camera = (FloatingActionButton) findViewById(R.id.floatingCamera);
 
         requestWrite();
-        populateList();
 
         gallery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,21 +105,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //click OCR text to find text
-        OCRTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                autoFind();
-            }
-        });
-
-        //click picture to reset text
-        imgPicture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OCRTextView.setText(stringBuilder.toString());
-            }
-        });
     }
     //for the drawer to pop out added by Carlos
     @Override
@@ -337,11 +327,13 @@ public class MainActivity extends AppCompatActivity {
                             stringBuilder.append("\n");
                         }
                         //String exam = txt.stringList(stringBuilder.toString(),"Exam");
-                        OCRTextView.setText(stringBuilder.toString());
+                        //OCRTextView.setText(stringBuilder.toString());
+                        afterResult();
                     }
                 });
             }
         }
+
     }
 
     //rotate image if not 0 degrees
@@ -402,25 +394,70 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //find text from list
-    public void autoFind(){
-        final StringBuilder str = new StringBuilder();
-        for(int i = 0; i < list.size(); i++ ){
-            String find = list.get(i);
-            if(txt.hasString(stringBuilder.toString(),find)){
-                str.append(txt.stringList(stringBuilder.toString(),find));
-                OCRTextView.setText(str);
-            }
-
+    public void afterResult(){
+        list = txt.populateList(list);
+        importantText = txt.importantList(stringBuilder.toString(),list);
+        Log.v("TAGG", "in func "+ stringBuilder.toString());
+        listItems = importantText.toArray(new String[importantText.size()]);
+        checkedItems = new boolean[listItems.length];
+        final AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
+        if(listItems != null && listItems.length > 0){
+            mBuilder.setTitle("select your sentence");
+            mBuilder.setMultiChoiceItems(listItems, checkedItems, new DialogInterface.OnMultiChoiceClickListener(){
+                @Override
+                public void onClick(DialogInterface dialogInterface, int position, boolean isChecked){
+                    if(isChecked){
+                        mUserItems.add(position);
+                    }else{
+                        mUserItems.remove((Integer.valueOf(position)));
+                    }
+                }
+            });
+            mBuilder.setCancelable(false);
+            mBuilder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String item = "";
+                    for(int i = 0; i< mUserItems.size(); i++){
+                        item = item + listItems[mUserItems.get(i)];
+                    }
+                    OCRTextView.setText(item);
+                }
+            });
+            mBuilder.setNegativeButton("cancel", new DialogInterface.OnClickListener(){
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+            mBuilder.setNeutralButton("select all",new DialogInterface.OnClickListener(){
+                @Override
+                public void onClick(DialogInterface dialogInterface, final int which){
+                    for (int i = 0; i < checkedItems.length; i++) {
+                        checkedItems[i] = false;
+                        mUserItems.clear();
+                        //mItemSelected.setText("");
+                    }
+                    String item = "";
+                    for(int j = 0; j< importantText.size(); j++){
+                        item = item + importantText.get(j);
+                    }
+                    OCRTextView.setText(item);
+                }
+            });
+        } else {
+            mBuilder.setTitle("no Important text");
+            mBuilder.setCancelable(false);
+            mBuilder.setNegativeButton("cancel", new DialogInterface.OnClickListener(){
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+            OCRTextView.setText("no important text");
         }
-    }
-
-    //create list of text
-    public void populateList(){
-        list.add("Exam");
-        list.add("Email");
-        list.add("midterm");
-        list.add("due");
+        AlertDialog mDialog = mBuilder.create();
+        mDialog.show();
     }
 
 }

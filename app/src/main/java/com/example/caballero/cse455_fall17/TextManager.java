@@ -1,13 +1,48 @@
 package com.example.caballero.cse455_fall17;
 
 
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+
+import java.text.BreakIterator;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class TextManager extends AppCompatActivity {
 
     //constructor
     public TextManager() {
+    }
+
+    //create list of text
+    public static List<String> populateList(List<String> list){
+        if(!list.isEmpty())
+            list.clear();
+        list.add("Exam");
+        list.add("Email");
+        list.add("midterm");
+        list.add("due");
+        return list;
+    }
+
+    public static List<String> importantList(String str, List<String> list){
+        List<String> returnList = new ArrayList<>();
+        BreakIterator iterator = BreakIterator.getSentenceInstance(Locale.US);
+        iterator.setText(str);
+        int start = iterator.first();
+        for(int end = iterator.next();
+            end != BreakIterator.DONE;
+            start = end, end = iterator.next()){
+            for(int j = 0; j < list.size(); j++ ){
+                String find = list.get(j);
+                if(hasString(str.substring(start,end),find)){
+                    returnList.add(str.substring(start,end));
+                }
+            }
+        }
+
+        return returnList;
+
     }
 
     //returns true if string has a given word
@@ -18,29 +53,5 @@ public class TextManager extends AppCompatActivity {
         return true;
     }
 
-    //returns a line with all text found
-    @NonNull
-    public static String stringList(String str, String substr){
-        final StringBuilder stringBuilder = new StringBuilder();
-        String tolowerString = str.toLowerCase();
-        int fPos = tolowerString.indexOf(substr.toLowerCase());
-        int lPos = tolowerString.indexOf(".", fPos);
-        int n = str.length();
-
-        while (--n > 0 && fPos != -1) {
-            stringBuilder.append(str.substring(fPos, lPos));
-            stringBuilder.append("\n");
-            fPos = tolowerString.indexOf(substr.toLowerCase(), fPos + 1);
-            lPos = tolowerString.indexOf(".", fPos + 1);
-
-            /*//Log.i("tttttt",Integer.toString(fPos) + " " + Integer.toString(lPos));
-            while(!tolowerString.substring(lPos + 1, lPos + 2).equals(" ") &&
-                    !tolowerString.substring(lPos + 1, lPos + 2).equals("\n")){
-                Log.i("tttttt",tolowerString.substring(lPos + 1, lPos + 2));
-                lPos = tolowerString.indexOf(".", lPos + 1) + 2;
-            }*/
-        }
-        return stringBuilder.toString();
-    }
 
 }
