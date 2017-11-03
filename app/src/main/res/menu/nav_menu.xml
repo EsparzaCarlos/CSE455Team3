@@ -5,9 +5,16 @@
         android:id="@+id/gohome"
         android:title="Home"
 <<<<<<< HEAD
+<<<<<<< HEAD
         android:visible="true"/>
 =======
         android:visible="true">
+=======
+        android:visible="true">
+    </item>
+    <item android:id="@+id/settings"
+        android:title="Settings">
+>>>>>>> parent of 8f4863c... Testing
     </item>
 >>>>>>> parent of 8f4863c... Testing
     <item android:id="@+id/settings"

@@ -3,7 +3,11 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 25
 <<<<<<< HEAD
+<<<<<<< HEAD
     buildToolsVersion '25.0.2'
+=======
+    buildToolsVersion "25.0.2"
+>>>>>>> parent of 8f4863c... Testing
 =======
     buildToolsVersion "25.0.2"
 >>>>>>> parent of 8f4863c... Testing
