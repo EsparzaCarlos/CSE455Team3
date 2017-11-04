@@ -3,16 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CSE455Team3.iml" filepath="$PROJECT_DIR$/CSE455Team3.iml" />
-<<<<<<< HEAD
-<<<<<<< HEAD
-      <module fileurl="file://$PROJECT_DIR$/CSE455Team3.iml" filepath="$PROJECT_DIR$/CSE455Team3.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-=======
-      <module fileurl="file://$PROJECT_DIR$/CSE455_fall17.iml" filepath="$PROJECT_DIR$/CSE455_fall17.iml" />
->>>>>>> parent of 8f4863c... Testing
-=======
-      <module fileurl="file://$PROJECT_DIR$/CSE455_fall17.iml" filepath="$PROJECT_DIR$/CSE455_fall17.iml" />
->>>>>>> parent of 8f4863c... Testing
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
