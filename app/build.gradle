@@ -2,7 +2,13 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
+<<<<<<< HEAD
     buildToolsVersion '26.0.2'
+=======
+    buildToolsVersion '25.0.2'
+    buildToolsVersion "25.0.2"
+    buildToolsVersion "25.0.2"
+>>>>>>> 3b851a2a6f85d9f4219ad147023cc6492ac750ab
     defaultConfig {
         applicationId "com.example.caballero.cse455_fall17"
         minSdkVersion 21
