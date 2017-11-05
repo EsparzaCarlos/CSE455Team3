@@ -13,11 +13,9 @@
         android:layout_height="wrap_content"
         android:fontFamily="casual"
         android:text="Professor Page"
-        android:textColor="@color/lightthemeText"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp"
-        android:background="@color/lightthemePrimary1"/>
+        tools:layout_editor_absoluteY="16dp"/>
 
     //for the nav bar
     <android.support.design.widget.NavigationView

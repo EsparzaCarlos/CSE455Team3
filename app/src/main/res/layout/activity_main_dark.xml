@@ -60,7 +60,7 @@
                 android:onClick="goToProfessors"
                 app:backgroundTint="@android:color/holo_red_dark"
                 app:fabSize="mini"
-                app:srcCompat="@android:drawable/stat_sys_phone_call_forward" />
+                app:srcCompat="@android:drawable/stat_sys_speakerphone" />
 
 
         </RelativeLayout>
