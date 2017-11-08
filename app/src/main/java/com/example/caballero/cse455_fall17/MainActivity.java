@@ -99,6 +99,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, Theme.class));
                 this.finish();
                 return true;
+            case R.id.faq:
+                startActivity(new Intent(MainActivity.this, FAQ.class));
+                this.finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -59,6 +59,10 @@ public class ProfessorActivity extends AppCompatActivity {
                 startActivity(new Intent(ProfessorActivity.this, Theme.class));
                 this.finish();
                 return true;
+            case R.id.faq:
+                startActivity(new Intent(ProfessorActivity.this, FAQ.class));
+                this.finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
