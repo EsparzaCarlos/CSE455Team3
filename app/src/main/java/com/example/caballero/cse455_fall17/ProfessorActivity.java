@@ -30,16 +30,8 @@ public class ProfessorActivity extends AppCompatActivity {
     //for the drawer to pop out added by Carlos
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(mToggle.onOptionsItemSelected(item)) {
-            switch (item.getItemId()){
-                case R.id.gohome:
-                    Intent homeintent = new Intent(this, MainActivity.class);
-                    startActivity(homeintent);
-                    return true;
-                default:
-                    return super.onOptionsItemSelected(item);
-            }
-        }
+        if(mToggle.onOptionsItemSelected(item))
+            return true;
         return super.onOptionsItemSelected(item);
     }
 }

@@ -22,9 +22,9 @@
         </provider>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".splash"
             android:screenOrientation="portrait"
-            >
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,9 +35,8 @@
             android:name=".ProfessorActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".splash"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Theme"
             android:screenOrientation="portrait" />
