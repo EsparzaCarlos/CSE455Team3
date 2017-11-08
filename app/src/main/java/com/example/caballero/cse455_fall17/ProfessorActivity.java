@@ -5,6 +5,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -19,19 +21,46 @@ public class ProfessorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_professor);
 
-        //for the drawer added by Carlos
+        /*//for the drawer added by Carlos
         mDrawerLayout=(DrawerLayout) findViewById(R.id.drawer);
         mToggle=new ActionBarDrawerToggle(this,mDrawerLayout,R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
     }
 
-    //for the drawer to pop out added by Carlos
+    /*//for the drawer to pop out added by Carlos
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(mToggle.onOptionsItemSelected(item))
             return true;
         return super.onOptionsItemSelected(item);
+    }*/
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.nav_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.home:               //from              to
+                startActivity(new Intent(ProfessorActivity.this, MainActivity.class));
+                this.finish();
+                return true;
+            case R.id.settings:
+                startActivity(new Intent(ProfessorActivity.this, MainActivity.class));
+                this.finish();
+                return true;
+            case R.id.thememenu:
+                startActivity(new Intent(ProfessorActivity.this, Theme.class));
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

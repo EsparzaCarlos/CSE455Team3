@@ -22,7 +22,6 @@ public class Theme extends AppCompatActivity {
                 SharedPreferences theme = getSharedPreferences("THEME_SELECT" , Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = theme.edit();
                 editor.putInt("THEME", R.layout.activity_main_dark);
-                editor.putInt("THEME", R.layout.activity_professor_dark);
                 editor.commit();
                 startActivity(new Intent(Theme.this, MainActivity.class));
                 finish();
