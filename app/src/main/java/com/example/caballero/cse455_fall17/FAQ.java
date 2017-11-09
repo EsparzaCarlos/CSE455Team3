@@ -19,6 +19,8 @@ public class FAQ extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faq);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         expandableListView = (ExpandableListView) findViewById(R.id.ExpandableList);
 
         ExpandableListViewAdapter expandableListViewAdapter = new ExpandableListViewAdapter(FAQ.this);
@@ -32,8 +34,18 @@ public class FAQ extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed(){
+        startActivity(new Intent(FAQ.this,MainActivity.class));
+        this.finish();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case android.R.id.home:
+                startActivity(new Intent(FAQ.this,MainActivity.class));
+                this.finish();
+                return true;
             case R.id.home:               //from              to
                 startActivity(new Intent(FAQ.this, MainActivity.class));
                 this.finish();
@@ -47,11 +59,10 @@ public class FAQ extends AppCompatActivity {
                 this.finish();
                 return true;
             case R.id.faq:
-                startActivity(new Intent(FAQ.this, FAQ.class));
-                this.finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+
     }
 }

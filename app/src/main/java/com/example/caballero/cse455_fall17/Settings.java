@@ -13,6 +13,8 @@ public class Settings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -22,15 +24,23 @@ public class Settings extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed(){
+        startActivity(new Intent(Settings.this,MainActivity.class));
+        this.finish();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case android.R.id.home:               //from              to
+                startActivity(new Intent(Settings.this, MainActivity.class));
+                this.finish();
+                return true;
             case R.id.home:               //from              to
                 startActivity(new Intent(Settings.this, MainActivity.class));
                 this.finish();
                 return true;
             case R.id.settings:
-                startActivity(new Intent(Settings.this, MainActivity.class));
-                this.finish();
                 return true;
             case R.id.thememenu:
                 startActivity(new Intent(Settings.this, Theme.class));
