@@ -6,14 +6,23 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.Toolbar;
 
 public class FAQ extends AppCompatActivity {
+
+    ExpandableListView expandableListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faq);
+
+        expandableListView = (ExpandableListView) findViewById(R.id.ExpandableList);
+
+        ExpandableListViewAdapter expandableListViewAdapter = new ExpandableListViewAdapter(FAQ.this);
+        expandableListView.setAdapter(expandableListViewAdapter);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
