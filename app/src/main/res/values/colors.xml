@@ -4,8 +4,23 @@
     <color name="colorPrimaryDark">#292a30</color>
     <color name="colorAccent">#ff4081</color>
 
-    <color name="lightthemePrimary1">#F2FCFF</color>
-    <color name="lightthemePrimary2">#F2F2EF</color>
-    <color name="lightthemeAccent">#34CAFA</color>
-    <color name="lightthemeText">#1C1919</color>
+    <!-- theme light colors-->
+    <color name="lightthemePrimary1">#F5FFFA</color> <!--MINTCREAM-->
+    <color name="lightthemePrimary2">#AFEEEE</color> <!--PALETURQUOISE-->
+    <color name="lightthemeAccent">#FF4500</color> <!--ORANGERED-->
+    <color name="lightthemeText">#708090</color> <!--SLATEGRAY-->
+    <color name="lightthemeTextSecond">#FF8C00</color> <!--DARKORANGE-->
+    <color name="lightthemeTextInverse">#FFFFFF</color> <!--WHITE-->
+    <color name="lightthemeTextSecInverse">#FF00FF</color> <!--MAGENTA-->
+    <color name="lightthemePrimaryInverse">#AFEEEE</color> <!--PALETURQUOISE-->
+
+    <!-- theme dark colors-->
+    <color name="darkthemePrimary1">#191970</color> <!--MIDNIGHTBLUE-->
+    <color name="darkthemePrimary2">#00008B</color> <!--DARKBLUE-->
+    <color name="darkthemeAccent">#DC143C</color> <!--CRIMSON-->
+    <color name="darkthemeText">#C0C0C0</color> <!--SILVER-->
+    <color name="darkthemeTextSecond">#FFFFF0</color> <!--IVORY-->
+    <color name="darkthemeTextInverse">#000000</color> <!--BLACK-->
+    <color name="darkthemeTextSecInverse">#696969</color> <!--DIMGRAY-->
+    <color name="darkthemePrimaryInverse">#00008B</color> <!--DARKBLUE-->
 </resources>

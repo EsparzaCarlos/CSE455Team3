@@ -6,11 +6,11 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/cat_app"
+        android:icon="@mipmap/catapp2"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/cat_app"
+        android:roundIcon="@mipmap/catapp2"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppThemeLight">
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -40,9 +40,8 @@
         <activity
             android:name=".Theme"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".FAQ"></activity>
-
+        <activity android:name=".FAQ" />
+        <activity android:name=".Settings"></activity>
     </application>
 
 </manifest>
