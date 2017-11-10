@@ -13,7 +13,7 @@
     <item android:id="@+id/faq"
         android:title="FAQ"/>
     <item android:id="@+id/log"
-        android:title="debug Log"/>
+        android:title="Send feedback"/>
     <item
         android:id="@+id/thememenu"
         android:title="Theme"/>

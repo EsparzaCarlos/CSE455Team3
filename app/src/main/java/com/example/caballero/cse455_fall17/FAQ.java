@@ -60,6 +60,10 @@ public class FAQ extends AppCompatActivity {
                 return true;
             case R.id.faq:
                 return true;
+            case R.id.log:
+                startActivity(new Intent(FAQ.this, com.example.caballero.cse455_fall17.Log.class));
+                this.finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

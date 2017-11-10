@@ -42,18 +42,25 @@
         <activity
             android:name=".Theme"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".FAQ"
+        <activity
+            android:name=".FAQ"
             android:label="Frequently asked questions"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.caballero.cse455_fall17.MainActivity" />
         </activity>
-
-        <activity android:name=".Settings"
-            android:parentActivityName=".MainActivity"
-            android:label="Settings">
+        <activity
+            android:name=".Settings"
+            android:label="Settings"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.caballero.cse455_fall17.MainActivity" />
+        </activity>
+        <activity android:name=".Log"
+            android:label="Send your bugs our way!"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.caballero.cse455_fall17.MainActivity" />

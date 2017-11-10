@@ -102,6 +102,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, FAQ.class));
                 this.finish();
                 return true;
+            case R.id.log:
+                startActivity(new Intent(MainActivity.this, com.example.caballero.cse455_fall17.Log.class));
+                this.finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -5,12 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.caballero.cse455_fall17.Settings">
+
     <TextView
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:text="Themes"
-        android:textSize="20sp"/>
+        android:text="Work in progress..."
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="6dp" />
 
 
 </android.support.constraint.ConstraintLayout>
