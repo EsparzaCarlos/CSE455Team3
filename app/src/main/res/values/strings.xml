@@ -4,4 +4,13 @@
 
     <string name="open">Open</string>
     <string name="close">Close</string>
+
+    <string-array name="bugs">
+        <item>Bug</item>
+        <item>Error</item>
+        <item>Did not find my professor!</item>
+        <item>Did not find my important dates!</item>
+        <item>This app just sucks!</item>
+        <item>This app is the best in the world plz take my money!PLZ</item>
+    </string-array>
 </resources>

@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 public class Log extends AppCompatActivity {
 
@@ -18,16 +19,16 @@ public class Log extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
 
+        final Spinner spinner = (Spinner) findViewById(R.id.fromName);
         final EditText tosub = (EditText) findViewById(R.id.sendTo);
         final EditText bod = (EditText) findViewById(R.id.emailBody);
-        final EditText from = (EditText) findViewById(R.id.fromName);
 
         Button sendEmail = (Button)findViewById(R.id.send);
         sendEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String ebod = bod.getText().toString();
-                String frm = from.getText().toString();
+                String frm = spinner.getSelectedItem().toString();
                 String toE = tosub.getText().toString();
 
                 Intent email = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + toE));

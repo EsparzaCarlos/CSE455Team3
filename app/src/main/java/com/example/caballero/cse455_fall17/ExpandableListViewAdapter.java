@@ -20,7 +20,7 @@ public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
     String[][] childnames = { {"The point is to get an A in CSE 455! Duh.", "Maybe learn something too..."},
                             {"Hopefully to help you get some answers you are looking for."},
                             {"Do not panic this app is still in beta and there are (hopefully not) lots of bugs " +
-                                    "but you can help by reporting them to the team in the log tab"},
+                                    "but you can help by reporting them to the team in the send feedback tab"},
                             {"Most likely you have NOTHING better to do :D"}};
 
     Context context;

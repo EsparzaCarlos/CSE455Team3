@@ -22,12 +22,6 @@ public class nav_menuActivity extends AppCompatActivity {
         return true;
     }
 
-    /*@Override
-        protected void (Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.menu.nav_menu);
-        }*/
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -42,20 +36,5 @@ public class nav_menuActivity extends AppCompatActivity {
         }
 
     }
-
-    /*public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.home:
-                Intent intenttomain = new Intent(this, MainActivity.class);
-                startActivity(intenttomain);
-                break;
-            case R.id.settings:
-                Intent intenttomain2 = new Intent(this, MainActivity.class);
-                startActivity(intenttomain2);
-                break;
-            default:
-                break;
-        }
-    }*/
 }
 
