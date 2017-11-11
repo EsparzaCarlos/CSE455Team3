@@ -53,5 +53,4 @@ public class TextManager extends AppCompatActivity {
         return true;
     }
 
-
 }
