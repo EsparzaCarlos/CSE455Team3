@@ -1,6 +1,8 @@
 package com.example.caballero.cse455_fall17;
 
 import android.Manifest;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,9 +12,13 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.icu.util.Calendar;
+import android.icu.util.TimeZone;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
+import android.provider.CalendarContract;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
@@ -43,9 +49,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -127,12 +135,15 @@ public class MainActivity extends AppCompatActivity {
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
 
+        //request permissions
+        requestPermissions();
+
         OCRTextView = (TextView) findViewById(R.id.ocrtext);
         imgPicture = (ImageView) findViewById(R.id.imageView);
         FloatingActionButton gallery = (FloatingActionButton) findViewById(R.id.floatingGallery);
         FloatingActionButton camera = (FloatingActionButton) findViewById(R.id.floatingCamera);
+        FloatingActionButton calendar = (FloatingActionButton) findViewById(R.id.floatingCalendar);
 
-        requestWrite();
 
         gallery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,6 +155,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startCamera();
+            }
+        });
+        calendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("content://com.android.calendar/time/")));
             }
         });
 
@@ -163,34 +181,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //ask user permission for external storage
-    public void requestWrite(){
-        // Here, thisActivity is the current activity
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-
-            } else {
-
-                // No explanation needed, we can request the permission.
-
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        1);
-            }
-        }
-    }
 
     //open gallery and wait for result
     public void callGallery() {
+        stringBuilder.delete(0,stringBuilder.length());
+        importantText.clear();
+        mUserItems.clear();
         // invoke the image gallery using an implict intent.
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
 
@@ -209,6 +205,9 @@ public class MainActivity extends AppCompatActivity {
 
     //open camera and wait
     void startCamera() {
+        stringBuilder.delete(0,stringBuilder.length());
+        importantText.clear();
+        mUserItems.clear();
         try {
             dispatchTakePictureIntent();
         } catch (IOException e) {
@@ -262,14 +261,11 @@ public class MainActivity extends AppCompatActivity {
                         // get a bitmap from the stream.
                         image = BitmapFactory.decodeStream(inputStream);
 
-
                         rotateImage(imageUri);
                         processImage();
 
                         // show the image to the user
                         imgPicture.setImageBitmap(image);
-
-
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                         // show a message to the user indictating that the image is unavailable.
@@ -439,9 +435,12 @@ public class MainActivity extends AppCompatActivity {
     public void afterResult(){
         list = txt.populateList(list, "");
         importantText = txt.importantList(stringBuilder.toString(),list);
-        Log.v("TAGG", "in func "+ stringBuilder.toString());
-        listItems = importantText.toArray(new String[importantText.size()]);
+        Set<String> tempSet = new HashSet<>(importantText);
+        listItems = tempSet.toArray(new String[tempSet.size()]);
         checkedItems = new boolean[listItems.length];
+        importantText.clear();
+        importantText.addAll(tempSet);
+
         final AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
         if(listItems != null && listItems.length > 0){
             mBuilder.setTitle("select your sentence");
@@ -462,6 +461,12 @@ public class MainActivity extends AppCompatActivity {
                     String item = "";
                     for(int i = 0; i< mUserItems.size(); i++){
                         item = item + listItems[mUserItems.get(i)];
+                        if(txt.isDate(listItems[mUserItems.get(i)])){
+                            addToCalendar(listItems[mUserItems.get(i)]);
+                        }
+                        if(txt.isContact(listItems[mUserItems.get(i)])){
+                            startActivityForResult(txt.contactDetect(listItems[mUserItems.get(i)]), 1);
+                        }
                     }
                     OCRTextView.setText(item);
                 }
@@ -483,6 +488,12 @@ public class MainActivity extends AppCompatActivity {
                     String item = "";
                     for(int j = 0; j< importantText.size(); j++){
                         item = item + importantText.get(j);
+                        if(txt.isDate(importantText.get(j))){
+                            addToCalendar(importantText.get(j));
+                        }
+                        if(txt.isContact(importantText.get(j))){
+                            startActivityForResult(txt.contactDetect(importantText.get(j)), 1);
+                        }
                     }
                     OCRTextView.setText(item);
                 }
@@ -502,4 +513,61 @@ public class MainActivity extends AppCompatActivity {
         mDialog.show();
     }
 
+    //permissions
+    public void requestPermissions(){
+        int PERMISSION_ALL = 1;
+        String[] PERMISSIONS = {Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_CALENDAR};
+        if(!hasPermissions(this, PERMISSIONS)){
+            ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
+        }
+    }
+    public static boolean hasPermissions(Context context, String... permissions) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    //automatically adds dates to calendar
+    public void addToCalendar(String s){
+
+        String day = txt.dateDetect(s);
+        SimpleDateFormat yyyyMMdd = new SimpleDateFormat("MMddyyyyHH");/*android.icu.text.*/
+        Calendar cal = Calendar.getInstance();
+        try {
+            cal.setTime(yyyyMMdd.parse(day));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        cal.add(Calendar.DATE, 0);
+
+        ContentResolver cr = getContentResolver();
+        ContentValues values = new ContentValues();
+
+        values.put(CalendarContract.Events.DTSTART, cal.getTimeInMillis());
+        values.put(CalendarContract.Events.TITLE, "Smart Syllabus Event");
+        values.put(CalendarContract.Events.DESCRIPTION, s);
+
+        TimeZone timeZone = TimeZone.getDefault();
+        values.put(CalendarContract.Events.EVENT_TIMEZONE, timeZone.getID());
+
+        // Default calendar
+        values.put(CalendarContract.Events.CALENDAR_ID, 3);
+
+        // Set Period for 1 Hour
+        values.put(CalendarContract.Events.DURATION, "+P1H");
+
+        values.put(CalendarContract.Events.HAS_ALARM, 1);
+
+        // Insert event to calendar
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, values);
+    }
 }

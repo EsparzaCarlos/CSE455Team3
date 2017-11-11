@@ -62,6 +62,18 @@
                     app:fabSize="mini"
                     app:srcCompat="@android:drawable/stat_sys_speakerphone" />
 
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/floatingCalendar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    app:fabSize="normal"
+                    android:backgroundTint="@color/lightthemeAccent"
+                    app:srcCompat="@android:drawable/ic_menu_my_calendar"
+                    android:layout_marginTop="43dp"
+                    android:layout_below="@+id/floatingGallery"
+                    android:layout_alignStart="@+id/floatingGallery" />
+
 
             </RelativeLayout>
 
