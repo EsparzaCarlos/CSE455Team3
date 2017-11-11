@@ -15,6 +15,10 @@ import java.util.Locale;
 
 public class TextManager extends AppCompatActivity {
 
+    private static String name = "";
+    private static String email = "";
+    private static String phone = "";
+
     //constructor
     public TextManager() {
     }
@@ -137,19 +141,21 @@ public class TextManager extends AppCompatActivity {
     //takes in a formatted contact and returns an intent to the contacts
     public static Intent contactDetect(String s){
         String[] array = s.split("\n");
-        String name = array[0];
-        String number = "";
-        String email = "";
+        /*String name = array[0];
+        String phone = "";
+        String email = "";*/
+        name = array[0];
+        
         for(int i = 0; i < array.length; i++){
             android.util.Log.v("TEST", array[i]);
             if(hasString(array[i], "email")){
                 email = array[i].substring(array[i].indexOf(" "));
             }
             if(hasString(array[i], "phone")){
-                number = array[i].substring(array[i].indexOf(" "));
+                phone = array[i].substring(array[i].indexOf(" "));
             }
         }
-        Log.v("TEST", name+"---"+number+"---"+email);
+        Log.v("TEST", name+"---"+phone+"---"+email);
 
         Intent contactIntent = new Intent(ContactsContract.Intents.Insert.ACTION);
         contactIntent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
@@ -157,9 +163,21 @@ public class TextManager extends AppCompatActivity {
         contactIntent
                 .putExtra(ContactsContract.Intents.Insert.NAME, name)
                 .putExtra(ContactsContract.Intents.Insert.EMAIL, email)
-                .putExtra(ContactsContract.Intents.Insert.PHONE, number);
+                .putExtra(ContactsContract.Intents.Insert.PHONE, phone);
 
         return contactIntent;
         //startActivityForResult(contactIntent, 1);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhone() {
+        return phone;
     }
 }

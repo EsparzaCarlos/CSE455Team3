@@ -465,6 +465,12 @@ public class MainActivity extends AppCompatActivity {
                             addToCalendar(listItems[mUserItems.get(i)]);
                         }
                         if(txt.isContact(listItems[mUserItems.get(i)])){
+
+                            SharedPreferences prof = getSharedPreferences("PROFESSOR_SELECT" , Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = prof.edit();
+                            editor.putString("PROFESSOR", listItems[mUserItems.get(i)]);
+                            editor.apply();
+
                             startActivityForResult(txt.contactDetect(listItems[mUserItems.get(i)]), 1);
                         }
                     }
@@ -492,6 +498,12 @@ public class MainActivity extends AppCompatActivity {
                             addToCalendar(importantText.get(j));
                         }
                         if(txt.isContact(importantText.get(j))){
+
+                            SharedPreferences prof = getSharedPreferences("PROFESSOR_SELECT" , Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = prof.edit();
+                            editor.putString("PROFESSOR", importantText.get(j));
+                            editor.apply();
+
                             startActivityForResult(txt.contactDetect(importantText.get(j)), 1);
                         }
                     }
