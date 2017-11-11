@@ -3,8 +3,8 @@
     package="com.example.caballero.cse455_fall17">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_CALENDAR"/>
-    <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
 
     <application
         android:allowBackup="true"
@@ -24,26 +24,32 @@
         </provider>
 
         <activity
-            android:name=".MainActivity"
-            android:screenOrientation="portrait">
+            android:name=".SplashScreen"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+             />
+
         <activity
             android:name=".ProfessorActivity"
             android:label="Who to contact?"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".splash"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
         <activity
             android:name=".Theme"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".FAQ"
             android:label="Frequently asked questions"
@@ -52,6 +58,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.caballero.cse455_fall17.MainActivity" />
         </activity>
+
         <activity
             android:name=".Settings"
             android:label="Settings"
@@ -60,13 +67,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.caballero.cse455_fall17.MainActivity" />
         </activity>
-        <activity android:name=".Log"
+
+        <activity
+            android:name=".Log"
             android:label="Send your bugs our way!"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.caballero.cse455_fall17.MainActivity" />
         </activity>
+
     </application>
 
 </manifest>
