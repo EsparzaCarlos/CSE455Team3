@@ -437,7 +437,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void afterResult(){
-        list = txt.populateList(list);
+        list = txt.populateList(list, "");
         importantText = txt.importantList(stringBuilder.toString(),list);
         Log.v("TAGG", "in func "+ stringBuilder.toString());
         listItems = importantText.toArray(new String[importantText.size()]);
