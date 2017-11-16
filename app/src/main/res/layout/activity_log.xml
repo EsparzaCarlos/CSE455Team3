@@ -8,12 +8,10 @@
 
     <EditText
         android:id="@+id/sendTo"
-        android:layout_width="wrap_content"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/fromName"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/fromName"
-        android:layout_marginTop="27dp"
+        android:layout_alignStart="@+id/textView7"
+        android:layout_below="@+id/textView6"
         android:clickable="false"
         android:editable="false"
         android:ems="10"
@@ -26,7 +24,7 @@
 
     <EditText
         android:id="@+id/fromName2"
-        android:layout_width="250dp"
+        android:layout_width="280dp"
         android:layout_height="49dp"
         android:layout_alignStart="@+id/emailBody"
         android:layout_below="@+id/sendTo"
@@ -40,13 +38,13 @@
 
     <EditText
         android:id="@+id/emailBody"
-        android:layout_width="250dp"
-        android:layout_height="120dp"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:ems="10"
         android:hint="Write you message to us"
-        android:inputType="textPersonName"
+        android:inputType="textMultiLine"
         tools:layout_editor_absoluteX="84dp"
         tools:layout_editor_absoluteY="160dp" />
 
@@ -95,11 +93,13 @@
 
     <Spinner
         android:id="@+id/fromName"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/fromName2"
         android:layout_alignBottom="@+id/fromName2"
-        android:layout_alignEnd="@+id/fromName2"
-        android:entries="@array/bugs" />
+        android:layout_alignStart="@+id/fromName2"
+        android:layout_marginStart="8dp"
+        android:entries="@array/bugs"
+        android:typeface="serif" />
 
 </RelativeLayout>

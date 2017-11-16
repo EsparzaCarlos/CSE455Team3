@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.caballero.cse455_fall17.Settings">
+    tools:context="com.example.caballero.cse455_fall17.Settings"
+    android:backgroundTint="@color/lightthemePrimary1">
 
-    <TextView
+    <ListView
+        android:id="@+id/mainSettingsList"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:text="Work in progress..."
-        android:textSize="20sp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="6dp" />
-
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="44dp" />
 
 </android.support.constraint.ConstraintLayout>

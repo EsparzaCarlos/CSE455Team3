@@ -41,7 +41,13 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".Theme"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:label="Customize your app"
+            android:parentActivityName=".Settings">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY2"
+            android:value="com.example.caballero.cse455_fall17.Settings" />
+        </activity>
         <activity
             android:name=".FAQ"
             android:label="Frequently asked questions"
@@ -58,7 +64,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.caballero.cse455_fall17.MainActivity" />
         </activity>
-        <activity android:name=".Log"
+        <activity
+            android:name=".Log"
             android:label="Send your bugs our way!"
             android:parentActivityName=".MainActivity">
             <meta-data

@@ -10,7 +10,8 @@
         android:layout_height="30dp"
         android:clickable="true"
         android:text="Dark Theme"
-        android:textSize="20sp"/>
+        android:textSize="18sp"
+        android:typeface="serif"/>
     <TextView
         android:id="@+id/themeLight"
         android:layout_width="match_parent"
@@ -18,6 +19,7 @@
         android:layout_marginTop="20dp"
         android:clickable="true"
         android:text="Light Theme"
-        android:textSize="20sp"/>
+        android:textSize="18sp"
+        android:typeface="serif"/>
 
 </LinearLayout>
