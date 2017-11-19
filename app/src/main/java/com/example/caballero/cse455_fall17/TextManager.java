@@ -149,15 +149,18 @@ public class TextManager extends AppCompatActivity {
         name = array[0];
 
         for(int i = 0; i < array.length; i++){
-            android.util.Log.v("TEST", array[i]);
+            Log.v(TAG,array[i]+" "+Integer.toString(i));
             if(hasString(array[i], "email")){
-                email = array[i].substring(array[i].indexOf(" "));
+                email = array[i].substring(array[i].indexOf(" ") + 1);
+                if(hasString(email, " "))
+                    email = email.substring(0, email.indexOf(" "));
             }
             if(hasString(array[i], "phone")){
-                phone = array[i].substring(array[i].indexOf(" "));
+                phone = array[i].substring(array[i].indexOf(" ") + 1);
+                if(hasString(phone, " "))
+                    phone = phone.substring(0, phone.indexOf(" "));
             }
         }
-        Log.v("TEST", name+"---"+phone+"---"+email);
 
         Intent contactIntent = new Intent(ContactsContract.Intents.Insert.ACTION);
         contactIntent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
