@@ -1,6 +1,8 @@
 package com.example.caballero.cse455_fall17;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -20,10 +22,15 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProfessorActivity extends AppCompatActivity {
 
     private static final String TAG = "ProfessorActivity";
+    TextManager txt;
+    String name = "";
+    String phone = "";
+    String email = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +39,34 @@ public class ProfessorActivity extends AppCompatActivity {
 
         SwipeMenuListView listView = (SwipeMenuListView) findViewById(R.id.swipelistview);
 
+        SharedPreferences prof = getSharedPreferences("PROFESSOR_SELECT", Context.MODE_PRIVATE);
+        String professor = prof.getString("PROFESSOR", null);
+
+        final List<String> emails = new ArrayList<>();
+        emails.add("RandomProfessor@spam4me.com");
+        emails.add("Dr.Rando@spam4me.com");
+
+        final List<String> phones = new ArrayList<>();
+        phones.add("tel:0123456789");
+        phones.add("tel:9876543210");
+
         ArrayList<String> list = new ArrayList<>();
         list.add("Dr.Professor Pat");
         list.add("Dr.Professor Guy");
+
+        String repeat = "";
+        for(int i = 0; i < list.size(); i++){
+            repeat = list.get(i) + " ";
+        }
+
+        if(professor != "") {
+            getContactInfo(professor);
+            if(!txt.hasString(repeat, name)){
+                list.add(name);
+                phones.add("tel:"+phone);
+                emails.add(email);
+            }
+        }
 
         ArrayAdapter adapter = new ArrayAdapter(ProfessorActivity.this, android.R.layout.simple_list_item_1, list);
         listView.setAdapter(adapter);
@@ -79,22 +111,15 @@ public class ProfessorActivity extends AppCompatActivity {
                 switch (index) {
                     case 0:
                         Intent intent = new Intent(Intent.ACTION_DIAL);
-                        intent.setData(Uri.parse("tel:0123456789"));
+                        intent.setData(Uri.parse(phones.get(position)));
                         startActivity(intent);
                         break;
                     case 1:
-                        if(position == 0){
-                            Intent email = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + "RandomProfessor@spam4me.com"));
-
-                            startActivity(Intent.createChooser(email, "Choose app to send the email"));
-                            break;
-                        }
-                        else{
-                            Intent email = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + "Dr.Rando@spam4me.com"));
-
-                            startActivity(Intent.createChooser(email, "Choose app to send the email"));
-                            break;
-                        }
+                        Intent email = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + emails.get(position)));
+                        startActivity(Intent.createChooser(email, "Choose app to send the email"));
+                        break;
+                    default:
+                        break;
                 }
                 // false : close the menu; true : not close the menu
                 return false;
@@ -129,6 +154,21 @@ public class ProfessorActivity extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void getContactInfo(String s) {
+        String[] array = s.split("\n");
+        name = array[0];
+
+        for (int i = 0; i < array.length; i++) {
+            android.util.Log.v("TEST", array[i]);
+            if (txt.hasString(array[i], "email")) {
+                email = array[i].substring(array[i].indexOf(" "));
+            }
+            if (txt.hasString(array[i], "phone")) {
+                phone = array[i].substring(array[i].indexOf(" "));
+            }
         }
     }
 }

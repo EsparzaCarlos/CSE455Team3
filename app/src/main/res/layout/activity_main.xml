@@ -31,36 +31,56 @@
                     android:id="@+id/floatingGallery"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_above="@+id/floatingCalendar"
+                    android:layout_alignStart="@+id/floatingCalendar"
+                    android:layout_marginBottom="14dp"
+                    android:backgroundTint="@color/lightthemePrimary2"
                     android:clickable="true"
                     android:visibility="visible"
+                    app:backgroundTint="@color/lightthemePrimary2"
                     app:fabSize="normal"
-                    app:srcCompat="@android:drawable/ic_menu_gallery"
-                    android:layout_below="@+id/floatingCamera"
-                    android:layout_alignStart="@+id/floatingCamera"
-                    android:layout_marginTop="40dp"
-                    android:backgroundTint="@color/lightthemeAccent"/>
+                    app:srcCompat="@android:drawable/ic_menu_gallery" />
 
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/floatingCamera"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/floatingGallery"
+                    android:layout_alignStart="@+id/floatingGallery"
+                    android:layout_marginBottom="72dp"
+                    android:backgroundTint="@color/lightthemePrimary2"
                     android:clickable="true"
+                    app:backgroundTint="@color/lightthemePrimary2"
                     app:fabSize="normal"
-                    app:srcCompat="@android:drawable/ic_menu_camera"
-                    android:layout_centerHorizontal="true"
-                    android:backgroundTint="@color/lightthemeAccent"/>
+                    app:srcCompat="@android:drawable/ic_menu_camera" />
 
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/floatingContact"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentTop="true"
-                    android:backgroundTint="@color/lightthemeAccent"
+                    android:backgroundTint="@color/lightthemePrimary2"
                     android:clickable="true"
                     android:onClick="goToProfessors"
+                    app:backgroundTint="@color/lightthemePrimary2"
                     app:fabSize="mini"
-                    app:srcCompat="@android:drawable/stat_sys_speakerphone" />
+                    app:srcCompat="@android:drawable/stat_sys_speakerphone"
+                    android:layout_marginTop="6dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignEnd="@+id/floatingCamera" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/floatingCalendar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginEnd="9dp"
+                    android:backgroundTint="@color/lightthemePrimary2"
+                    android:clickable="true"
+                    app:backgroundTint="@color/lightthemePrimary2"
+                    app:fabSize="normal"
+                    app:srcCompat="@android:drawable/ic_menu_my_calendar" />
 
 
             </RelativeLayout>

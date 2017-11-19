@@ -14,9 +14,9 @@
 
     <style name="AppThemeDark" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/darkthemePrimary2</item>
+        <item name="colorPrimary">@color/lightthemePrimary2</item>
         <item name="colorAccent">@color/darkthemeAccent</item>
-        <item name="colorPrimaryDark">@color/darkthemePrimaryInverse</item>
+        <item name="colorPrimaryDark">@color/lightthemePrimaryInverse</item>
         <item name="android:textColorPrimary">@color/darkthemeText</item>
         <item name="android:textColorSecondary">@color/darkthemeTextSecond</item>
         <item name="android:textColorPrimaryInverse">@color/darkthemeTextInverse</item>
