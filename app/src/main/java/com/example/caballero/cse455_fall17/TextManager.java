@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class TextManager extends AppCompatActivity {
-
+    final static String TAG = "TEST";
     private static String name = "";
     private static String email = "";
     private static String phone = "";
@@ -46,9 +46,11 @@ public class TextManager extends AppCompatActivity {
 
     //returns list of important stuff
     public static List<String> importantList(String str, List<String> list) {
-        List<String> returnList = new ArrayList<>();
 
+        List<String> returnList = new ArrayList<>();
+        List<String> removeList = new ArrayList<>();
         List<String> contactList = new ArrayList<>();
+
         populateList(contactList, "CONTACT");
         String contactString = "";
         String doctor = "";
@@ -57,19 +59,19 @@ public class TextManager extends AppCompatActivity {
         BreakIterator iterator = BreakIterator.getSentenceInstance(Locale.US);
         iterator.setText(str);
         int start = iterator.first();
-        for (int end = iterator.next();
+        for(int end = iterator.next();
              end != BreakIterator.DONE;
              start = end, end = iterator.next()) {
 
-            if (!hasString(str.substring(start, end), "dr.") && next) {
+            if(!hasString(str.substring(start, end), "dr.") && next) {
                 doctor = doctor + str.substring(start, end);
                 next = false;
             }
-            if (hasString(str.substring(start, end), "dr.")) {
+            if(hasString(str.substring(start, end), "dr.")) {
                 doctor = doctor + str.substring(start, end);
                 next = true;
             }
-            for (int j = 0; j < list.size(); j++) {
+            for(int j = 0; j < list.size(); j++) {
                 if (hasString(str.substring(start, end), list.get(j))) {
                     returnList.add(str.substring(start, end));
                 }
@@ -78,19 +80,19 @@ public class TextManager extends AppCompatActivity {
 
         for (int i = returnList.size() - 1; i >= 0; i--) {
             for (int j = contactList.size() - 1; j >= 0; j--) {
-                if (hasString(returnList.get(i), contactList.get(j))) {
+                if (hasString(returnList.get(i), contactList.get(j)) && !hasString(returnList.get(i), "tablets")) {
                     if (!hasString(returnList.get(i), "dr"))
                         contactString = contactString + returnList.get(i);
-                    returnList.remove(i);
+                    removeList.add(returnList.get(i));
                 }
             }
         }
+        returnList.removeAll(removeList);
 
         if (!contactString.isEmpty()){
             contactString = doctor + contactString;
             returnList.add(contactString);
         }
-
         return returnList;
     }
 

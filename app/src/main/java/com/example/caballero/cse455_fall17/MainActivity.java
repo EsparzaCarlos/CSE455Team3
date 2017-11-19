@@ -60,6 +60,7 @@ import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
+    final static String TAG = "TEST";
     //for popdialog picker
     ArrayList<Integer> mUserItems = new ArrayList<>();
     //for words to find
@@ -430,6 +431,7 @@ public class MainActivity extends AppCompatActivity {
         checkedItems = new boolean[listItems.length];
         importantText.clear();
         importantText.addAll(tempSet);
+
 
         final AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
         if(listItems != null && listItems.length > 0){
