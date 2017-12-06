@@ -461,6 +461,7 @@ public class MainActivity extends AppCompatActivity {
                             SharedPreferences prof = getSharedPreferences("PROFESSOR_SELECT" , Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = prof.edit();
                             editor.putString("PROFESSOR", listItems[mUserItems.get(i)]);
+                            Log.v(TAG,"11 "+listItems[mUserItems.get(i)] );
                             editor.apply();
 
                             startActivityForResult(txt.contactDetect(listItems[mUserItems.get(i)]), 1);

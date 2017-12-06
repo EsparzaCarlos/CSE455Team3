@@ -10,11 +10,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.*;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.util.Log;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
@@ -26,7 +28,7 @@ import java.util.List;
 
 public class ProfessorActivity extends AppCompatActivity {
 
-    private static final String TAG = "ProfessorActivity";
+    private static final String TAG = "TEST";
     TextManager txt;
     String name = "";
     String phone = "";
@@ -41,6 +43,7 @@ public class ProfessorActivity extends AppCompatActivity {
 
         SharedPreferences prof = getSharedPreferences("PROFESSOR_SELECT", Context.MODE_PRIVATE);
         String professor = prof.getString("PROFESSOR", null);
+        Log.v(TAG,"22"+professor);
 
         final List<String> emails = new ArrayList<>();
         emails.add("RandomProfessor@spam4me.com");
@@ -168,6 +171,9 @@ public class ProfessorActivity extends AppCompatActivity {
             }
             if (txt.hasString(array[i], "phone")) {
                 phone = array[i].substring(array[i].indexOf(" "));
+            }
+            if(txt.hasString(array[i], "instructor")){
+                name = array[i].substring(array[i].indexOf(" ") + 1);
             }
         }
     }

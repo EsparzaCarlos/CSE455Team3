@@ -31,9 +31,11 @@ public class TextManager extends AppCompatActivity {
             case "CONTACT": list.add("Email");
                 list.add("dr");
                 list.add("phone");
+                list.add("instructor");
                 break;
             default:        list.add("Exam");
                 list.add("dr");
+                list.add("instructor");
                 list.add("phone");
                 list.add("Email");
                 list.add("midterm");
@@ -88,7 +90,6 @@ public class TextManager extends AppCompatActivity {
             }
         }
         returnList.removeAll(removeList);
-
         if (!contactString.isEmpty()){
             contactString = doctor + contactString;
             returnList.add(contactString);
@@ -110,16 +111,16 @@ public class TextManager extends AppCompatActivity {
         String date = "";
         int start = s.indexOf("/") - 2;
         int end = s.substring(start).indexOf(" ");
-        android.util.Log.v("TXT",s.substring(start, start + end));
+        //android.util.Log.v("TXT",s.substring(start, start + end));
         String string = s.substring(start, start + end);
         while (hasString(string, "/")){
-            android.util.Log.v("TXT", string.substring(0, string.indexOf("/")));
+            //android.util.Log.v("TXT", string.substring(0, string.indexOf("/")));
             date = date + string.substring(0, string.indexOf("/"));
             string = string.substring(string.indexOf("/") + 1);
-            android.util.Log.v("TXT", string);
+           // android.util.Log.v("TXT", string);
         }
         date = date + "20" + string + "07";
-        android.util.Log.v("TXT", date);
+       // android.util.Log.v("TXT", date);
         //return s.substring(start, start + end);
         return date;
     }
@@ -148,8 +149,9 @@ public class TextManager extends AppCompatActivity {
         String email = "";*/
         name = array[0];
 
+
         for(int i = 0; i < array.length; i++){
-            Log.v(TAG,array[i]+" "+Integer.toString(i));
+            //Log.v(TAG,array[i]+" "+Integer.toString(i));
             if(hasString(array[i], "email")){
                 email = array[i].substring(array[i].indexOf(" ") + 1);
                 if(hasString(email, " "))
@@ -160,8 +162,11 @@ public class TextManager extends AppCompatActivity {
                 if(hasString(phone, " "))
                     phone = phone.substring(0, phone.indexOf(" "));
             }
+            if(hasString(array[i], "instructor")){
+                name = array[i].substring(array[i].indexOf(" ") + 1);
+            }
         }
-
+        //Log.v(TAG,"name = "+name+" phone = "+phone+" email = "+email);
         Intent contactIntent = new Intent(ContactsContract.Intents.Insert.ACTION);
         contactIntent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
 

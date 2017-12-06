@@ -51,7 +51,7 @@ public class FAQ extends AppCompatActivity {
                 this.finish();
                 return true;
             case R.id.settings:
-                startActivity(new Intent(FAQ.this, MainActivity.class));
+                startActivity(new Intent(FAQ.this, Settings.class));
                 this.finish();
                 return true;
             case R.id.thememenu:
