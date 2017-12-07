@@ -1,6 +1,8 @@
 package com.example.caballero.cse455_fall17;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.GestureDetector;
@@ -26,8 +28,19 @@ public class Settings extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences theme = getSharedPreferences("THEME_SELECT" , Context.MODE_PRIVATE);
+        int themeInt = theme.getInt("THEME", 0);
+        if(themeInt != R.layout.activity_main_dark && themeInt != R.layout.activity_main)
+            themeInt = R.layout.activity_settings;
+        if(themeInt == R.layout.activity_main_dark){
+            setTheme(R.style.AppThemeDark);
+            themeInt = R.layout.dark_settings;
+        }
+        if(themeInt == R.layout.activity_main){
+            themeInt = R.layout.activity_settings;
+        }
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(themeInt);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

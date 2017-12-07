@@ -24,6 +24,7 @@ public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
                             {"Most likely you have NOTHING better to do :D"}};
 
     Context context;
+    boolean theme;
 
     public ExpandableListViewAdapter(Context context){
         this.context = context;
@@ -70,7 +71,10 @@ public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
         txtView.setText(groupnames[groupPosition]);
         txtView.setPadding(100,50,0,0);
         txtView.setTextSize(25);
-        txtView.setTextColor(Color.BLACK);
+        if(theme)
+            txtView.setTextColor(Color.BLACK);
+        else
+            txtView.setTextColor(Color.LTGRAY);
         return txtView;
     }
 
@@ -80,7 +84,10 @@ public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
         txtView.setText(childnames[groupPosition][childPosition]);
         txtView.setPadding(100,50,0,0);
         txtView.setTextSize(22);
-        txtView.setTextColor(Color.BLACK);
+        if(theme)
+            txtView.setTextColor(Color.BLACK);
+        else
+            txtView.setTextColor(Color.LTGRAY);
 
         txtView.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -94,5 +101,13 @@ public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return false;
+    }
+
+    public boolean isTheme() {
+        return theme;
+    }
+
+    public void setTheme(boolean theme) {
+        this.theme = theme;
     }
 }

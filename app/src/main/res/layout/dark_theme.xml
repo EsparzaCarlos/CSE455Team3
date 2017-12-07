@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
+
+    <TextView
+        android:id="@+id/themeDark"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:clickable="true"
+        android:text="Dark Theme"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="18sp"
+        android:typeface="serif"/>
+    <TextView
+        android:id="@+id/themeLight"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:text="Light Theme"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="18sp"
+        android:typeface="serif"/>
+
+</LinearLayout>

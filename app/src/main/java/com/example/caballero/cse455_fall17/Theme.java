@@ -15,8 +15,19 @@ public class Theme extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences theme = getSharedPreferences("THEME_SELECT" , Context.MODE_PRIVATE);
+        int themeInt = theme.getInt("THEME", 0);
+        if(themeInt != R.layout.activity_main_dark && themeInt != R.layout.activity_main)
+            themeInt = R.layout.activity_theme;
+        if(themeInt == R.layout.activity_main_dark){
+            setTheme(R.style.AppThemeDark);
+            themeInt = R.layout.dark_theme;
+        }
+        if(themeInt == R.layout.activity_main){
+            themeInt = R.layout.activity_theme;
+        }
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_theme);
+        setContentView(themeInt);
 
         TextView dark = (TextView) findViewById(R.id.themeDark);
         dark.setOnClickListener(new View.OnClickListener() {

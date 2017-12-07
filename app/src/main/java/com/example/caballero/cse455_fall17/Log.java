@@ -1,6 +1,8 @@
 package com.example.caballero.cse455_fall17;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,8 +20,19 @@ public class Log extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences theme = getSharedPreferences("THEME_SELECT" , Context.MODE_PRIVATE);
+        int themeInt = theme.getInt("THEME", 0);
+        if(themeInt != R.layout.activity_main_dark && themeInt != R.layout.activity_main)
+            themeInt = R.layout.activity_log;
+        if(themeInt == R.layout.activity_main_dark){
+            setTheme(R.style.AppThemeDark);
+            themeInt = R.layout.dark_log;
+        }
+        if(themeInt == R.layout.activity_main){
+            themeInt = R.layout.activity_log;
+        }
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log);
+        setContentView(themeInt);
 
         final Spinner spinner = (Spinner) findViewById(R.id.fromName);
         final EditText tosub = (EditText) findViewById(R.id.sendTo);
