@@ -457,7 +457,6 @@ public class MainActivity extends AppCompatActivity {
                             addToCalendar(listItems[mUserItems.get(i)]);
                         }
                         if(txt.isContact(listItems[mUserItems.get(i)])){
-
                             SharedPreferences prof = getSharedPreferences("PROFESSOR_SELECT" , Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = prof.edit();
                             editor.putString("PROFESSOR", listItems[mUserItems.get(i)]);

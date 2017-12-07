@@ -33,11 +33,15 @@ public class ProfessorActivity extends AppCompatActivity {
     String name = "";
     String phone = "";
     String email = "";
+    boolean isRepeat = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_professor);
+
+        DBHandler db = new DBHandler(this);
+        List<ProfessorInfo> professorInfos = db.getAllProf();
 
         SwipeMenuListView listView = (SwipeMenuListView) findViewById(R.id.swipelistview);
 
@@ -45,19 +49,26 @@ public class ProfessorActivity extends AppCompatActivity {
         String professor = prof.getString("PROFESSOR", null);
         Log.v(TAG,"22"+professor);
 
+        SharedPreferences index = getSharedPreferences("PROF_INDEX" , Context.MODE_PRIVATE);
+        int indexCount = index.getInt("CURRENT", 0);
+        SharedPreferences.Editor editor = index.edit();
+        editor.putInt("CURRENT", professorInfos.size() + 1);
+        editor.apply();
+        indexCount = index.getInt("CURRENT", 0);
+
         final List<String> emails = new ArrayList<>();
-        emails.add("RandomProfessor@spam4me.com");
-        emails.add("Dr.Rando@spam4me.com");
+        /*emails.add("RandomProfessor@spam4me.com");
+        emails.add("Dr.Rando@spam4me.com");*/
 
         final List<String> phones = new ArrayList<>();
-        phones.add("tel:0123456789");
-        phones.add("tel:9876543210");
+        /*phones.add("tel:0123456789");
+        phones.add("tel:9876543210");*/
 
         ArrayList<String> list = new ArrayList<>();
-        list.add("Dr.Professor Pat");
-        list.add("Dr.Professor Guy");
+        /*list.add("Dr.Professor Pat");
+        list.add("Dr.Professor Guy");*/
 
-        String repeat = "";
+        /*String repeat = "";
         for(int i = 0; i < list.size(); i++){
             repeat = list.get(i) + " ";
         }
@@ -69,6 +80,27 @@ public class ProfessorActivity extends AppCompatActivity {
                 phones.add("tel:"+phone);
                 emails.add(email);
             }
+        }*/
+        getContactInfo(professor);
+        for(ProfessorInfo professorInfo : professorInfos){
+            if(professorInfo.getName().equals(name))
+                isRepeat = true;
+
+        }
+        if(!isRepeat)
+            db.addProf(new ProfessorInfo(indexCount, name, phone, email));
+        professorInfos = db.getAllProf();
+        list.clear();
+        phones.clear();
+        emails.clear();
+        for(ProfessorInfo professorInfo : professorInfos){
+            String log = "id: " + professorInfo.getId()+ " ,Name: "+ professorInfo.getName() +
+                    " , phone: "+ professorInfo.getPhone() + " , Email: " +
+                    professorInfo.getEmail();
+            list.add(professorInfo.getName());
+            phones.add("tel:"+professorInfo.getPhone());
+            emails.add(professorInfo.getEmail());
+            Log.v(TAG, log);
         }
 
         ArrayAdapter adapter = new ArrayAdapter(ProfessorActivity.this, android.R.layout.simple_list_item_1, list);
