@@ -47,6 +47,8 @@ public class ProfessorActivity extends AppCompatActivity {
 
         SharedPreferences prof = getSharedPreferences("PROFESSOR_SELECT", Context.MODE_PRIVATE);
         String professor = prof.getString("PROFESSOR", null);
+        if(professor == null)
+            professor = "empty";
         Log.v(TAG,"22"+professor);
 
         SharedPreferences index = getSharedPreferences("PROF_INDEX" , Context.MODE_PRIVATE);
@@ -83,6 +85,10 @@ public class ProfessorActivity extends AppCompatActivity {
         }*/
         getContactInfo(professor);
         for(ProfessorInfo professorInfo : professorInfos){
+            Log.v(TAG,"qq"+professorInfo.getName());
+            if(professorInfo.getName().equals("empty")){
+                db.deleteProf(new ProfessorInfo(1, null,null,null));
+            }
             if(professorInfo.getName().equals(name))
                 isRepeat = true;
 
