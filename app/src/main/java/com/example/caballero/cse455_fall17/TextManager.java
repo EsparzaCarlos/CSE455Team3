@@ -33,6 +33,19 @@ public class TextManager extends AppCompatActivity {
                 list.add("phone");
                 list.add("instructor");
                 break;
+            case "DATE": list.add("jan");
+                list.add("feb");
+                list.add("mar");
+                list.add("apr");
+                list.add("may");
+                list.add("jun");
+                list.add("jul");
+                list.add("aug");
+                list.add("sep");
+                list.add("oct");
+                list.add("nov");
+                list.add("dec");
+                break;
             default:        list.add("Exam");
                 list.add("dr");
                 list.add("instructor");
@@ -109,28 +122,69 @@ public class TextManager extends AppCompatActivity {
     @NonNull
     public static String dateDetect(String s){
         String date = "";
-        int start = s.indexOf("/") - 2;
-        int end = s.substring(start).indexOf(" ");
-        //android.util.Log.v("TXT",s.substring(start, start + end));
-        String string = s.substring(start, start + end);
-        while (hasString(string, "/")){
-            //android.util.Log.v("TXT", string.substring(0, string.indexOf("/")));
-            date = date + string.substring(0, string.indexOf("/"));
-            string = string.substring(string.indexOf("/") + 1);
-           // android.util.Log.v("TXT", string);
+        if(hasString(s, "/")) {
+            int start = s.indexOf("/") - 2;
+            int end = s.substring(start).indexOf(" ");
+            //android.util.Log.v("TXT",s.substring(start, start + end));
+            String string = s.substring(start, start + end);
+            while (hasString(string, "/")) {
+                //android.util.Log.v("TXT", string.substring(0, string.indexOf("/")));
+                date = date + string.substring(0, string.indexOf("/"));
+                string = string.substring(string.indexOf("/") + 1);
+                // android.util.Log.v("TXT", string);
+            }
+            date = date + "20" + string + "07";
+            // android.util.Log.v("TXT", date);
+            //return s.substring(start, start + end);
         }
-        date = date + "20" + string + "07";
-       // android.util.Log.v("TXT", date);
-        //return s.substring(start, start + end);
+        else{
+            String str = s.toLowerCase();
+            String day;
+            String month;
+            String year;
+            int i = 0;
+            List<String> dateList = new ArrayList<>();
+            populateList(dateList, "DATE");
+            for(String mdate : dateList) {
+                if (hasString(s, mdate)) {
+                    str = str.substring(str.indexOf(mdate));
+                    month = Integer.toString(i + 1);
+                    if (i < 10)
+                        month = "0" + Integer.toString(i + 1);
+
+                    year = str.substring(str.indexOf(" ") + 1);
+                    year = year.substring(year.indexOf(" ") + 1);
+                    year = year.substring(0, year.indexOf(" "));
+                    day = str.substring(str.indexOf(" ") + 1);
+                    day = day.substring(0, day.indexOf(","));
+                    if (Integer.parseInt(day) < 10)
+                        day = "0" + day;
+                    date = month + day + year + "07";
+                }
+                i++;
+            }
+        }
+        Log.v("DATE", date);
         return date;
     }
 
     public static boolean isDate(String s){
+        List<String> dateList = new ArrayList<>();
+        populateList(dateList, "DATE");
+        String test = "exam Dec 3, 2017 in jb";
+
         if(hasString(s, "/")){
-            return true;
             /*if(ordinalIndexOf(s, "/", 2) - ordinalIndexOf(s, "/", 1) == 3){
                 return true;
             }*/
+            return true;
+        }
+        for(String date : dateList){
+            if(hasString(s, date)) {
+                /*Log.v("DATE", date);*/
+                Log.v("DATE",dateDetect(s));
+                return true;
+            }
         }
         return false;
     }
